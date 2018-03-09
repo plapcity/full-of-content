@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 const HeroImage = (props) => {
 	console.log("hero image", props.data)
 	return (
-		<div class="component component-heroimage">
+		<div className="component component-heroimage">
 			<img src={`https:${props.data.fields.file.url}?w=250`} />
 		</div>
 	)

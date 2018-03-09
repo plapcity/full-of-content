@@ -20,7 +20,7 @@ class App extends Component {
         select: 'sys.id,fields.title,fields.slug'
       })
       .then(response => {
-        console.log(response)
+        console.log("app", response)
         this.setState({
           data: response.items
         })
@@ -29,7 +29,6 @@ class App extends Component {
   }
 
   renderNav(){
-    console.log(this.state.data);
    return this.state.data.map((item) => (
       <li key={item.sys.id}><Link to={`/${item.fields.slug}`}>{item.fields.title}</Link></li>
     ))

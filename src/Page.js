@@ -12,11 +12,12 @@ class Page extends React.Component {
 
   componentWillMount(){
     getCFClient()
-      .getEntry(this.props.pageId)
+      .getEntries({
+        'sys.id': this.props.pageId,
+        })
       .then(response => {
-        console.log("page response", response);
         this.setState({
-          page: response.fields
+          page: response.items[0].fields
         })
       })
       .catch(console.error)
@@ -25,6 +26,7 @@ class Page extends React.Component {
 
 
   renderComponents(page) {
+    console.log("render page", page)
     const components = {
       title: Title,
       copy: Copy,
