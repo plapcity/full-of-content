@@ -48,11 +48,10 @@ class App extends Component {
     return ( 
       <Router>
         <div>
-        <ul>
-         {this.renderNav()}
-        </ul>
-        {this.renderRoutes()}
-
+          <ul>
+           {this.renderNav()}
+          </ul>
+          {this.renderRoutes()}
         </div>
       </Router>
     );

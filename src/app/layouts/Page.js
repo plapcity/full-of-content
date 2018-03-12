@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'; 
 import { getCFClient } from '../../services/contentfulClient';
+import { renderFields } from '../../helpers'
 
-// atoms
-import Copy from '../atoms/Copy';
-import HeroImage from '../atoms/HeroImage';
-import Title from '../atoms/Title';
-import Superheader from '../atoms/Superheader';
+// fields
+import Copy from '../fields/Copy';
+import HeroImage from '../fields/HeroImage';
+import Title from '../fields/Title';
+import Superheader from '../fields/Superheader';
 
 // modules
 import TextAndImage from '../modules/TextAndImage';
@@ -16,7 +17,17 @@ class Page extends React.Component {
   state = {
     page: null,
     fields: null,
-    modules: null
+    modules: null,
+    fieldComponents: {
+      title: Title,
+      copy: Copy,
+      heroImage: HeroImage,
+      superheader: Superheader,
+    },
+    moduleComponents: {
+      textAndImageModule: TextAndImage,
+      textModule: Text,
+    }
   };
 
   componentWillMount(){
@@ -33,6 +44,7 @@ class Page extends React.Component {
   }
 
   handleResponse(response){
+    // grouping fields together and modules together
     let modules = response['modules']
     let fields = delete response['modules']
     fields = response
@@ -44,36 +56,11 @@ class Page extends React.Component {
   }
 
 
-  renderComponents(fields) {
-    if (!fields) return;
-    const components = {
-      title: Title,
-      copy: Copy,
-      heroImage: HeroImage,
-      superheader: Superheader
-    }
-    let output = []
-
-    for (const prop in components ) {
-      if (fields[prop]){
-        const PageField = components[prop];
-        output.push(<PageField key={prop} data={fields[prop]} />)
-      }
-    }
-
-    return output;
-
-  }
-
   renderModules(modules) {
     if (!modules) return;
-    const components = {
-      textAndImageModule: TextAndImage,
-      textModule: Text
-    }
 
     const renderedModules = modules.map((module) => {
-      const PageModule = components[module.sys.contentType.sys.id]
+      const PageModule = this.state.moduleComponents[module.sys.contentType.sys.id]
       return <PageModule key={module.sys.id} data= {module['fields']}/>
     })
 
@@ -86,11 +73,10 @@ class Page extends React.Component {
     
     return (
       <div className="homepage">
-        {this.renderComponents(this.state.fields)}
+        {renderFields(this.state.fields, this.state.fieldComponents)}
         {this.renderModules(this.state.modules)}
       </div>
     )
-
   }
 }
 

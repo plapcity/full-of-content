@@ -1,35 +1,23 @@
 import React, { Component } from 'react';
-import Copy from '../atoms/Copy';
-import Title from '../atoms/Title';
-import Image from '../atoms/Image';
+import { renderFields } from '../../helpers'
+import Copy from '../fields/Copy';
+import Title from '../fields/Title';
+import Image from '../fields/Image';
 
 
 class TextAndImage extends React.Component {
-
-	renderComponents(fields) {
-    console.log("render fields", fields)
-    const components = {
-      title: Title,
-      copy: Copy,
-      image: Image
-    }
-    let output = []
-
-    for (const prop in components ) {
-      if (fields[prop]){
-        const PageField = components[prop];
-        output.push(<PageField key={prop} data={fields[prop]} />)
-      }
-    }
-
-    return output;
-
+	state = {
+  	fieldComponents: {
+    	title: Title,
+    	copy: Copy,
+    	image: Image
+  	}
   }
 
   render() {
   	return(
 			<div className="module text-and-image-module">
-				{this.renderComponents(this.props.data)}
+				{renderFields(this.props.data, this.state.fieldComponents)}
 			</div>
   	)
   }
