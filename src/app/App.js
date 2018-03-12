@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { getCFClient } from './services/contentfulClient';
-import logo from './logo.svg';
+import { getCFClient } from '../services/contentfulClient';
 import './App.css';
 
-import Page from './Page';
+import Page from './layouts/Page';
 
 
 class App extends Component {
