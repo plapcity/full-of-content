@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 
 const Superheader = (props) => {
 	return (
-		<div className="component component-superheader">
-			<h1>{props.data}</h1>
+		<div className="field field-superheader">
+			<small>{props.data}</small>
 		</div>
 	)
 }

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 const Title = (props) => {
 	return (
-		<div className="component component-title">
+		<div className="field field-title">
 			<h1>{props.data}</h1>
 		</div>
 	)

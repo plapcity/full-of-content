@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 const Image = (props) => {
 	return (
-		<div className="component component-image">
+		<div className="field field-image">
 			<img src={`https:${props.data.fields.file.url}?w=250`} />
 		</div>
 	)

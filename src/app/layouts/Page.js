@@ -10,24 +10,15 @@ import Title from '../fields/Title';
 import Superheader from '../fields/Superheader';
 
 // modules
-import TextAndImage from '../modules/TextAndImage';
-import Text from '../modules/Text';
+import TextAndImageModule from '../modules/TextAndImageModule';
+import TextModule from '../modules/TextModule';
+import ImageModule from '../modules/ImageModule';
 
 class Page extends React.Component {
   state = {
     page: null,
     fields: null,
     modules: null,
-    fieldComponents: {
-      title: Title,
-      copy: Copy,
-      heroImage: HeroImage,
-      superheader: Superheader,
-    },
-    moduleComponents: {
-      textAndImageModule: TextAndImage,
-      textModule: Text,
-    }
   };
 
   componentWillMount(){
@@ -48,7 +39,6 @@ class Page extends React.Component {
     let modules = response['modules']
     let fields = delete response['modules']
     fields = response
-
     this.setState({
       fields: fields,
       modules: modules
@@ -60,7 +50,7 @@ class Page extends React.Component {
     if (!modules) return;
 
     const renderedModules = modules.map((module) => {
-      const PageModule = this.state.moduleComponents[module.sys.contentType.sys.id]
+      const PageModule = this.props.moduleComponents[module.sys.contentType.sys.id]
       return <PageModule key={module.sys.id} data= {module['fields']}/>
     })
 
@@ -73,11 +63,27 @@ class Page extends React.Component {
     
     return (
       <div className="homepage">
-        {renderFields(this.state.fields, this.state.fieldComponents)}
+        {renderFields("page.js", this.state.fields, this.props.fieldComponents)}
         {this.renderModules(this.state.modules)}
       </div>
     )
   }
 }
+
+// TODO: confirm that this is how I should do this
+Page.defaultProps = {
+    fieldComponents: {
+      title: Title,
+      copy: Copy,
+      heroImage: HeroImage,
+      superheader: Superheader,
+    },
+    moduleComponents: {
+      textAndImageModule: TextAndImageModule,
+      textModule: TextModule,
+      imageModule: ImageModule,
+    }
+  }
+
 
 export default Page;

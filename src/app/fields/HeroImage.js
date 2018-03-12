@@ -4,9 +4,8 @@
 import React, { Component } from 'react';
 
 const HeroImage = (props) => {
-	console.log("hero image", props.data)
 	return (
-		<div className="component component-heroimage">
+		<div className="field field-heroimage">
 			<img src={`https:${props.data.fields.file.url}?w=250`} />
 		</div>
 	)

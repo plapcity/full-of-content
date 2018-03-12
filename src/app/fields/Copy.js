@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 const Copy = (props) => {
 	return (
-		<div className="component component-copy">
+		<div className="field field-copy">
 			<p>{props.data}</p>
 		</div>
 	)
