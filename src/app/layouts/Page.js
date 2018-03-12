@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'; 
 import { getCFClient } from '../../services/contentfulClient';
+
+// atoms
 import Copy from '../atoms/Copy';
 import HeroImage from '../atoms/HeroImage';
 import Title from '../atoms/Title';
+import Superheader from '../atoms/Superheader';
+
+// modules
 import TextAndImage from '../modules/TextAndImage';
+import Text from '../modules/Text';
 
 class Page extends React.Component {
   state = {
     page: null,
+    fields: null,
+    modules: null
   };
 
   componentWillMount(){
@@ -17,32 +25,39 @@ class Page extends React.Component {
         'sys.id': this.props.pageId,
         })
       .then(response => {
-        console.log(response.items[0].fields['modules'])
         this.setState({
-          page: response.items[0].fields
-        })
+          page: response.items[0]
+        }, this.handleResponse(response.items[0].fields))
       })
       .catch(console.error)
   }
 
+  handleResponse(response){
+    let modules = response['modules']
+    let fields = delete response['modules']
+    fields = response
+
+    this.setState({
+      fields: fields,
+      modules: modules
+    })
+  }
 
 
-  renderComponents(page) {
-    console.log("render page", page)
+  renderComponents(fields) {
+    if (!fields) return;
     const components = {
       title: Title,
       copy: Copy,
       heroImage: HeroImage,
-      modules: {
-        textAndImageModule: TextAndImage
-      }
+      superheader: Superheader
     }
     let output = []
 
     for (const prop in components ) {
-      if (page[prop]){
-        const PageComponent = components[prop];
-        output.push(<PageComponent key={prop} data={page[prop]} />)
+      if (fields[prop]){
+        const PageField = components[prop];
+        output.push(<PageField key={prop} data={fields[prop]} />)
       }
     }
 
@@ -50,12 +65,29 @@ class Page extends React.Component {
 
   }
 
+  renderModules(modules) {
+    if (!modules) return;
+    const components = {
+      textAndImageModule: TextAndImage,
+      textModule: Text
+    }
+
+    const renderedModules = modules.map((module) => {
+      const PageModule = components[module.sys.contentType.sys.id]
+      return <PageModule key={module.sys.id} data= {module['fields']}/>
+    })
+
+    return renderedModules
+  }
+
+
   render() {
     if (!this.state.page) return null;
     
     return (
       <div className="homepage">
-        {this.renderComponents(this.state.page)}
+        {this.renderComponents(this.state.fields)}
+        {this.renderModules(this.state.modules)}
       </div>
     )
 

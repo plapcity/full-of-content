@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import Copy from '../atoms/Copy';
 import Title from '../atoms/Title';
-import Image from '../atoms/Image';
+import Superheader from '../atoms/Superheader';
 
 
-class TextAndImage extends React.Component {
+class Text extends React.Component {
 
 	renderComponents(fields) {
     console.log("render fields", fields)
     const components = {
+      superheader: Superheader,
       title: Title,
-      copy: Copy,
-      image: Image
+      copy: Copy
     }
     let output = []
 
@@ -28,7 +28,7 @@ class TextAndImage extends React.Component {
 
   render() {
   	return(
-			<div className="module text-and-image-module">
+			<div className="module text-module">
 				{this.renderComponents(this.props.data)}
 			</div>
   	)
@@ -37,4 +37,4 @@ class TextAndImage extends React.Component {
 
 }
 
-export default TextAndImage 
+export default Text 
