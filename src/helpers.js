@@ -10,13 +10,13 @@ export function	renderFields(source="no source defined", fields, components) {
     	const PageField = components[prop];
     	// below is handling the case of multiple images in a field
     	if (Array.isArray(fields[prop])) {
-    		fields[prop].map((item, i) => {
-    			output.push(<PageField key={`${prop}-${i}`} data={item} />)
-    		})
-
+        // get a warning about having a function in a loop but i'm not sure how else to do this.
+        fields[prop].map((item, i) => (
+         output = [...output, <PageField key={`${prop}-${i}`} data={item} />]
+      ))
     	} else {
     		// all other cases
-    		output.push(<PageField key={prop} data={fields[prop]} />)
+    		output = [...output, <PageField key={prop} data={fields[prop]} />]
     	}
     }
   }

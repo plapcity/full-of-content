@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { renderFields } from '../../helpers'
 import Copy from '../fields/Copy';
 import Headline from '../fields/Headline';
