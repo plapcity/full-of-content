@@ -49,6 +49,7 @@ class Page extends React.Component {
   renderModules(modules) {
     if (!modules) return;
 
+    // define dynamic react component 
     const renderedModules = modules.map((module) => {
       const PageModule = this.props.moduleComponents[module.sys.contentType.sys.id]
       return <PageModule key={module.sys.id} data= {module['fields']}/>

@@ -2,6 +2,7 @@ import React from 'react';
 
 // helper to dynamically render fields for pages, modules
 export function	renderFields(source="no source defined", fields, components) {
+	// note: source was only used so I could console log things
 	if (!fields) return;
   let output = []
   for (const prop in components ) {
@@ -14,6 +15,7 @@ export function	renderFields(source="no source defined", fields, components) {
     		})
 
     	} else {
+    		// all other cases
     		output.push(<PageField key={prop} data={fields[prop]} />)
     	}
     }
