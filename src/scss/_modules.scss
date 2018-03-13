@@ -1,0 +1,26 @@
+.module {
+	border: 2px solid blue;
+	margin: 20px 0;
+}
+
+.text-and-image-module {
+}
+
+.text-and-image {
+	display: flex;
+}
+
+.image-left {
+	.field-image {
+		order: 1;
+	}
+	.field-copy {
+		order: 2;
+	}
+}
+
+.image-right {
+	.field-image {
+		order: 2;
+	}
+}

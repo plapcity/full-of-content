@@ -6,7 +6,7 @@ import { renderFields } from '../../helpers'
 // fields
 import Copy from '../fields/Copy';
 import HeroImage from '../fields/HeroImage';
-import Title from '../fields/Title';
+import Headline from '../fields/Headline';
 import Superheader from '../fields/Superheader';
 
 // modules
@@ -74,7 +74,7 @@ class Page extends React.Component {
 // TODO: confirm that this is how I should do this
 Page.defaultProps = {
     fieldComponents: {
-      title: Title,
+      headline: Headline,
       copy: Copy,
       heroImage: HeroImage,
       superheader: Superheader,

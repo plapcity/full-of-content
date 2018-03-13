@@ -3,12 +3,12 @@
 
 import React, { Component } from 'react';
 
-const Title = (props) => {
+const Headline = (props) => {
 	return (
-		<div className="field field-title">
+		<div className="field field-headline">
 			<h1>{props.data}</h1>
 		</div>
 	)
 }
 
-export default Title 
+export default Headline 

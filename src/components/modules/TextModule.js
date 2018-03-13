@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { renderFields } from '../../helpers'
 import Copy from '../fields/Copy';
-import Title from '../fields/Title';
+import Headline from '../fields/Headline';
 import Superheader from '../fields/Superheader';
 
 
@@ -19,7 +19,7 @@ class TextModule extends React.Component {
 TextModule.defaultProps = {
   	fieldComponents: {
 	  	superheader: Superheader,
-      title: Title,
+      headline: Headline,
       copy: Copy
   	}
   }

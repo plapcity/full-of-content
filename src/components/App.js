@@ -14,13 +14,14 @@ class App extends Component {
   componentWillMount(){
     getCFClient()
       .getEntries({
-        content_type: 'page',
-        select: 'sys.id,fields.title,fields.slug'
+        content_type: 'navigation',
+        'fields.title': 'Main', 
+        // whats the best way to create navigation within contentful?
       })
       .then(response => {
         console.log("app", response)
         this.setState({
-          data: response.items
+          data: response.items[0].fields.navLinks /* <-- is there a more dynamic way? */
         })
       })
       .catch(console.error)

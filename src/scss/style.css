@@ -72,3 +72,15 @@ nav {
 .module {
   border: 2px solid blue;
   margin: 20px 0; }
+
+.text-and-image {
+  display: flex; }
+
+.image-left .field-image {
+  order: 1; }
+
+.image-left .field-copy {
+  order: 2; }
+
+.image-right .field-image {
+  order: 2; }
