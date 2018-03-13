@@ -63,7 +63,7 @@ class Page extends React.Component {
     if (!this.state.page) return null;
     
     return (
-      <div className="homepage">
+      <div className="page">
         {renderFields("page.js", this.state.fields, this.props.fieldComponents)}
         {this.renderModules(this.state.modules)}
       </div>

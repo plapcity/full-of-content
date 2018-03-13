@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { getCFClient } from '../services/contentfulClient';
-import './App.css';
 
 import Page from './layouts/Page';
 
@@ -29,7 +28,7 @@ class App extends Component {
 
   renderNav(){
    return this.state.data.map((item) => (
-      <li key={item.sys.id}><Link to={`/${item.fields.slug}`}>{item.fields.title}</Link></li>
+      <div className="nav-item" key={item.sys.id}><Link to={`/${item.fields.slug}`}>{item.fields.title}</Link></div>
     ))
   }
 
@@ -48,9 +47,9 @@ class App extends Component {
     return ( 
       <Router>
         <div>
-          <ul>
+          <nav>
            {this.renderNav()}
-          </ul>
+          </nav>
           {this.renderRoutes()}
         </div>
       </Router>
